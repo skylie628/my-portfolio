@@ -1,23 +1,28 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
+@font-face {
+  font-family: "HelveticaNeue", sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  src: local("HelveticaNeue"),
+    url("/fonts/HelveticaNeueBold.otf") format("opentype");
+}
+@font-face {
+  font-family: "HelveticaNeue", sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  src: local("HelveticaNeue"),
+    url("/fonts/HelveticaNeueLight.otf") format("opentype");
+}
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+  background-color: black;
+  color: white;
 }
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
-}
-
 body {
   color: rgb(var(--foreground-rgb));
+  font-family: "HelveticaNeue", sans-serif;
+  font-weight: 700;
   background: linear-gradient(
       to bottom,
       transparent,
@@ -25,9 +30,29 @@ body {
     )
     rgb(var(--background-start-rgb));
 }
-
+main {
+  padding: 0;
+  margin: 0;
+}
 @layer utilities {
   .text-balance {
     text-wrap: balance;
   }
+}
+.mark::before {
+  content: "";
+  display: block;
+  height: 10px;
+  width: 100%;
+  background-color: #ee372f;
+}
+.nick::before {
+  position: absolute;
+  content: "";
+  top: 0;
+  left: 0;
+  display: block;
+  height: 10px;
+  width: 24px;
+  background-color: #ee372f;
 }
