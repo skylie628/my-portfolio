@@ -3,6 +3,7 @@ import MTypography from "./MTypography";
 import MHeading from "./MHeading";
 import MSubHeading from "./MSubHeading";
 import MLink from "./MLink.tsx";
+
 const mdxComponents = {
   code: MCodeBlock,
   p: MTypography,

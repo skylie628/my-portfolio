@@ -1,6 +1,9 @@
-import React from "react";
+import { ReactNode } from "react";
 
-export default function MSubHeading(props) {
+interface MSubHeadingProps {
+  children?: ReactNode;
+}
+export default function MSubHeading(props: MSubHeadingProps) {
   return (
     <h2
       {...props}
