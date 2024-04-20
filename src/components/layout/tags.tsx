@@ -23,14 +23,12 @@ export default function Tags({ title, tags, isLink = false }: TagsProps) {
             )}
             key={index}
           >
-            {isLink ? (
-              <Link
-                href={typeof tag === "object" ? tag.to : "#"}
-                className={tagClasses}
-              >
-                {typeof tag === "object" ? tag.title : ""}
+            {isLink && typeof tag === "object" && (
+              <Link href={tag.to} className={tagClasses}>
+                {tag.title}
               </Link>
-            ) : (
+            )}
+            {!isLink && typeof tag === "string" && (
               <span className={tagClasses}>{tag}</span>
             )}
             , &nbsp;
