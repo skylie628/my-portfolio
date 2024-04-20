@@ -38,7 +38,7 @@ export async function generateMetadata(
   };
 }
 
-export default async function page({ params }) {
+export default async function page({ params }: { params: { slug: string } }) {
   const { slug }: { slug: string } = params;
   const { frontmatter, content } = await getPostData(slug);
 
