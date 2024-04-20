@@ -1,5 +1,6 @@
 import React from "react";
 import Blog from "@/components/blog";
+import { getAllBlogPosts } from "@/lib/actions/blog";
 export default function page() {
   const mockData = [
     {
@@ -38,10 +39,11 @@ export default function page() {
       slug: "fifth-blog",
     },
   ];
+  const postData = getAllBlogPosts();
   return (
-    <div className="flex gap-5 flex-col p-5">
-      {mockData.map((item) => (
-        <Blog key={item.slug} data={{ ...item, to: `blogs/${item.slug}` }} />
+    <div className="grid max-lg:grid-cols-1 grid-cols-2 gap-10 flex-col mt-5  py-10">
+      {postData.map((item, index) => (
+        <Blog key={item.slug} data={item} />
       ))}
     </div>
   );
