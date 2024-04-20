@@ -7,6 +7,10 @@ import { getPostData } from "@/lib/actions/blog";
 //types
 import type { Metadata, ResolvingMetadata } from "next";
 
+type Props = {
+  params: { slug: string };
+  searchParams: { [key: string]: string | string[] | undefined };
+};
 export async function generateMetadata(
   { params, searchParams }: Props,
   parent: ResolvingMetadata
@@ -34,7 +38,7 @@ export async function generateMetadata(
   };
 }
 
-export default async function page({ params }) {
+export default async function page({ params }: { params: { slug: string } }) {
   const { slug }: { slug: string } = params;
   const { frontmatter, content } = await getPostData(slug);
 

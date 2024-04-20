@@ -1,6 +1,9 @@
-import { Text } from "@chakra-ui/react";
+import { ReactNode } from "react";
 
-const MTypography = (props) => {
+interface MTypographyProps {
+  children?: ReactNode;
+}
+const MTypography = (props: MTypographyProps) => {
   return (
     <p {...props} className="my-3 text-base text-glyph-gray font-normal" />
   );

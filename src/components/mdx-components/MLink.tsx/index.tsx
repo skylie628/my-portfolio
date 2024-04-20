@@ -1,7 +1,19 @@
-import React from "react";
+import { ReactNode } from "react";
 import Link from "next/link";
-export default function MLink(props) {
-  return (
-    <Link {...props} className="text-blue-eye cursor-pointer hover:underline" />
-  );
+interface MLinkProps {
+  children?: ReactNode;
+  href?: string | undefined;
+}
+export default function MLink(props: MLinkProps) {
+  const { href } = props;
+  if (typeof href === "string") {
+    return (
+      <Link
+        {...props}
+        href={href}
+        className="text-blue-eye cursor-pointer hover:underline"
+      />
+    );
+  }
+  return <span {...props}></span>;
 }

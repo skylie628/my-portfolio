@@ -1,6 +1,10 @@
-import React from "react";
+import React, { ReactNode } from "react";
 
-export default function MHeading(props) {
+interface MHeadingProps {
+  children?: ReactNode;
+}
+
+export default function MHeading(props: MHeadingProps) {
   return (
     <h1
       {...props}

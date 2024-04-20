@@ -6,9 +6,9 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Khuong Dinh Portfolio",
-  description: "A portfolio of Khuong Dinh",
-  authors: [{ name: "khuongdinhvinh@gmail.com" }],
+  title: process.env.TITLE,
+  description: process.env.SITE_DESCRIPTION,
+  authors: [{ name: process.env.AUTHOR }],
   keywords: [
     "IT Blog",
     "Frontend",
@@ -19,9 +19,9 @@ export const metadata: Metadata = {
     "Javascript",
   ],
   openGraph: {
-    title: "Khuong Dinh Portfolio",
-    siteName: "Khuong Dinh Portfolio",
-    description: "A portfolio of Khuong Dinh",
+    title: process.env.TITLE,
+    siteName: process.env.SITENAME,
+    description: process.env.SITE_DESCRIPTION,
     type: "website",
   },
 };
