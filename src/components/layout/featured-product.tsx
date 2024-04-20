@@ -5,7 +5,7 @@ interface FeaturedProductProps {
   desc: string;
   teamSize: number;
   technical: string;
-  Children: React.ReactNode;
+  children: React.ReactNode;
 }
 export default function FeaturedProduct({
   name,
