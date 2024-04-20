@@ -7,6 +7,10 @@ import { getPostData } from "@/lib/actions/blog";
 //types
 import type { Metadata, ResolvingMetadata } from "next";
 
+type Props = {
+  params: { slug: string };
+  searchParams: { [key: string]: string | string[] | undefined };
+};
 export async function generateMetadata(
   { params, searchParams }: Props,
   parent: ResolvingMetadata
