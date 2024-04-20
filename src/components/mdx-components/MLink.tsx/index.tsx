@@ -2,7 +2,7 @@ import { ReactNode } from "react";
 import Link from "next/link";
 interface MLinkProps {
   children?: ReactNode;
-  href: string | undefined;
+  href?: string | undefined;
 }
 export default function MLink(props: MLinkProps) {
   const { href } = props;
