@@ -1,0 +1,48 @@
+---
+title: "Sequence Image"
+date: "March 4, 2021"
+excerpt: "Find out how Apple, Sony, Samsung catch client eyes by slick, flawless animation effects on the first visit. "
+cover_image: "https://devimages-cdn.apple.com/wwdc-services/images/D35E0E85-CCB6-41A1-B227-7995ECD83ED5/8259/8259_wide_900x506_2x.jpg"
+---
+
+I find myself continually drawn to the use of animation in web design. From my perspective, the primary challenge with animation is preventing it from causing visual discomfort for the viewer. This implies that animation should be employed judiciously, at appropriate moments, and with a clear purpose. Major corporations such as Apple and Samsung utilize a technique known as 'sequence images' on their websites. This method contributes to a spatial seamless user experience and provides detailed, realistic portrayals of their products.
+
+## Brief history of image sequence on scroll
+
+There are many case studys on leading companies.
+
+### Sony "Be move"
+
+This website was a pioneer on this trend, far advanced for its era. It was launched in 2014 and, although it's no longer active, we can still see recorded video of how it looked back then.
+
+<video width="100%" autoPlay muted loop>
+  <source src="/videos/camera.mp4" type="video/mp4" />
+  Your browser does not support the video tag.
+</video>
+
+### Apple airpod pro
+
+Apple was the second major corporation to enter the field, and they have expanded the limits even more. with the help of creative design teams and skillful frontend developers, they success in bringing immersive experiences to the viewer. [Look over the website](https://www.apple.com/airpods-pro/)
+
+<video width="100%" autoPlay muted loop>
+  <source src="/videos/airpod.mp4" type="video/mp4" />
+  Your browser does not support the video tag.
+</video>
+
+## How it be done?
+
+Take a closer inspect on Apple website. While loading, the browser requests for multiple images file. Each image represents a certain state of the object at a specific point in time. And the sequence of image when combined will give us a feeling of moving (it is how animation actually work).
+
+Fun facts, the intro of airpod need 64 images in total to finish animation.
+
+![browser load for image](/images/sequence_image/loading_img.png)
+
+These images, then, will be respectively painted in to canvas html tag. The decision which image will be painted is calcualted by the position of windows scroll. It means, javascript will listen to user scroll event, constantly calculate the new image index from pageYoffset, and end up painting new image into browser through canvas.
+
+But why is canvas?
+
+canvas can handle complex animations more efficiently than manipulating DOM elements like the image tag. This is because canvas operations do not affect the DOM tree, therefore avoiding potential reflow or repaint operations.
+
+To dive deeper, you can read an article from [ihatetomatoes.net](https://ihatetomatoes.net/sonys-be-moved-website-deconstructed/)
+
+In the next blog, we will try using sequence image on representation phonecase product.

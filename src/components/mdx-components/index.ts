@@ -2,6 +2,7 @@ import MCodeBlock from "./MCodeBlock";
 import MTypography from "./MTypography";
 import MHeading from "./MHeading";
 import MSubHeading from "./MSubHeading";
+import MVideo from "./MVideo";
 import MLink from "./MLink.tsx";
 
 const mdxComponents = {

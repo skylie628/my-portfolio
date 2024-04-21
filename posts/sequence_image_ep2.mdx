@@ -1,0 +1,105 @@
+---
+title: "Sequence Image episode 2"
+date: "March 5, 2021"
+excerpt: "In this part, we will try to apply animation on representing phonecase ad."
+cover_image: "https://devimages-cdn.apple.com/wwdc-services/images/D35E0E85-CCB6-41A1-B227-7995ECD83ED5/8259/8259_wide_900x506_2x.jpg"
+---
+
+In the previous part, we explored how sequence images operate under the hood. In this episode, we will try to implement it.
+
+## Strategy
+
+There are 2 approaches to archive, one is use scrollsequence WordPress Plugin and the other is code it by ourselves. I opted for the latter approach as it's more engaging :3 :3.
+
+About the javascript animation library, we have 3 different options:
+
+- **GreenSock Animation Platform (GSAP)** : This is the first choice when it comes to handling animation. GSAP is lightweight library and being used for advanced applications, games and animations.
+
+- **ScrollMagic Image Sequence** : ScrollMagic is an extension for GSAP. Although there are some online tutorials on how to use it, its performance and support are somewhat lacking. While it was a viable option previously, ScrollTrigger has now outperformed ScrollMagic in various aspects.
+- **JQuery Sequencer** : Based on the research I have conducted, this appears to be a simple approach, although I have not yet tested it.
+
+I decided to choose **ReactJS** with **GSAP** library on this blogs for its performance and familiarity.
+
+## Lets go
+
+By modeling and rendering on C4D, i have a set of 18 different 3d images. [You can get all here for data preparation](https://google.com)
+
+![data preparation](/images/sequence_image_ep2/data-prepare.PNG)
+
+Firstly, we define canvas tag in jsx render
+
+```
+ return <canvas ref = {canvas} >
+
+```
+
+Then, we need to preload all images in advance.
+
+```
+const preloadImage = () => {
+  let imgls = [...Array(19).keys()].map(x=>{
+      const image = new Image();
+      image.width = 3000;
+      image.height = 840;
+      image.src = require(`../../assets/images/Transparent Silicon Sequence Img/sil${x}.png`);
+      return image;
+  })
+  return imgls;
+};
+```
+
+Create render function, this function will trigger canvas to draw image when being called.
+
+```
+    const context = canvas.current.getContext('2d');
+    const render = () => {
+      context.clearRect (offsetX,offsetY,nwidth,windowDimensions.height*0.8);
+      context.drawImage(imagelist[id], offsetX,offsetY,nwidth,windowDimensions.height*0.8);
+    };
+
+```
+
+Before using GSAP to apply changes, we declare 2 necessary variables:
+
+```
+  const imgUrl = {index: 0}; //this is the object where gsap making change to index property according to the scroll position.
+  let id = 1; //this is actually index of which image is painted in canvas.
+```
+
+finally, we register gsap to create animation that updates the index property of an object (imgUrl) and calls a render function on every frame while the animation is active.
+
+```
+ useEffect(()=>{
+
+    const width = window.document.body.clientWidth;
+    const height = window.innerHeight;
+    setWindowDimensions({width : width,height : height})
+    const nwidth =  windowDimensions.height*0.8*3000/840;
+    const offsetX = (windowDimensions.width - nwidth) / 2 ;
+    const offsetY =  0;
+    const imgUrl = {index: 0};
+    const context = canvas.current.getContext('2d');
+    let requestId ;
+
+    const render = () => {
+      context.clearRect (offsetX,offsetY,nwidth,windowDimensions.height*0.8);
+      context.drawImage(imagelist[id], offsetX,offsetY,nwidth,windowDimensions.height*0.8);
+    };
+    imagelist[0].onload = render
+    //console.log(windowDimensions)
+    gsap.to(imgUrl, {
+      // backgroundPosition: (-offset_value * frame_count * 2) + "px 50%",
+      // ease: "steps(" + frame_count + ")", // use a stepped ease for the sprite sheet
+      index: 18,
+      scrollTrigger: {
+      start: 2*windowDimensions.height,
+      end: "+=" + windowDimensions.height,
+      scrub: 1 ,
+      },
+      onUpdate: self => {
+        const round = Math.round(imgUrl.index);
+        if (round !== id){
+        id = round;
+        requestId = window.requestAnimationFrame(render);}
+     }})
+```
