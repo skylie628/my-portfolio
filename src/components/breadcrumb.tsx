@@ -13,23 +13,24 @@ export default function Breadcrumb() {
       name: item.charAt(0).toLocaleUpperCase() + item.slice(1),
       className:
         index === segments.length - 1
-          ? "text-2xl cursor-default "
-          : "text-2xl text-red-orange hover:text-silver underline",
+          ? "text-xl md:text-2xl cursor-default "
+          : "text-xl md:text-2xl text-red-orange hover:text-silver underline",
     }));
   breadcrumb.unshift({
     to: "/",
     name: "Khuong Dinh",
-    className: "text-2xl text-red-orange hover:text-silver underline",
+    className:
+      "text-xl md:text-2xl text-red-orange hover:text-silver underline",
   });
   return (
-    <div className="flex  items-center">
+    <div className="flex flex-wrap items-center  ">
       {breadcrumb.map((item, index) => (
         <>
           <Link key={index} href={item.to} className={item.className}>
             {item.name}
           </Link>
           {index !== breadcrumb.length - 1 && (
-            <ChevronRightIcon className="inline-block text-2xl text-dimgray mx-1 h-5 w-5" />
+            <ChevronRightIcon className="inline-block text-lg md:text-2xl text-dimgray mx-1 h-5 w-5" />
           )}
         </>
       ))}

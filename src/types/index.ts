@@ -6,5 +6,6 @@ export interface PostsData {
   date: string;
   title: string;
   excerpt: string;
+  cover_image: string;
 }
 export interface Post {}

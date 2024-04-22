@@ -17,7 +17,7 @@ const getAllBlogPosts = (): PostsData[] => {
       //get file contents
       const fileContents = fs.readFileSync(fullPath, "utf8");
       //parse metadata of post
-      const { date, title, excerpt } = matter(fileContents).data;
+      const { date, title, excerpt, cover_image } = matter(fileContents).data;
       return {
         id,
         slug: id,
@@ -25,6 +25,7 @@ const getAllBlogPosts = (): PostsData[] => {
         date,
         title,
         excerpt,
+        cover_image,
       };
     })
     //sort post by date descending

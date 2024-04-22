@@ -2,7 +2,7 @@
 title: "Sequence Image episode 2"
 date: "March 5, 2021"
 excerpt: "In this part, we will try to apply animation on representing phonecase ad."
-cover_image: "https://devimages-cdn.apple.com/wwdc-services/images/D35E0E85-CCB6-41A1-B227-7995ECD83ED5/8259/8259_wide_900x506_2x.jpg"
+cover_image: "/images/sequence-image-2.jpg"
 ---
 
 In the previous part, we explored how sequence images operate under the hood. In this episode, we will try to implement it.
@@ -69,37 +69,29 @@ Before using GSAP to apply changes, we declare 2 necessary variables:
 finally, we register gsap to create animation that updates the index property of an object (imgUrl) and calls a render function on every frame while the animation is active.
 
 ```
- useEffect(()=>{
-
-    const width = window.document.body.clientWidth;
-    const height = window.innerHeight;
-    setWindowDimensions({width : width,height : height})
-    const nwidth =  windowDimensions.height*0.8*3000/840;
-    const offsetX = (windowDimensions.width - nwidth) / 2 ;
-    const offsetY =  0;
-    const imgUrl = {index: 0};
-    const context = canvas.current.getContext('2d');
-    let requestId ;
-
-    const render = () => {
-      context.clearRect (offsetX,offsetY,nwidth,windowDimensions.height*0.8);
-      context.drawImage(imagelist[id], offsetX,offsetY,nwidth,windowDimensions.height*0.8);
-    };
-    imagelist[0].onload = render
-    //console.log(windowDimensions)
     gsap.to(imgUrl, {
-      // backgroundPosition: (-offset_value * frame_count * 2) + "px 50%",
-      // ease: "steps(" + frame_count + ")", // use a stepped ease for the sprite sheet
-      index: 18,
+      index: 18, // number of frame
       scrollTrigger: {
-      start: 2*windowDimensions.height,
-      end: "+=" + windowDimensions.height,
+      start: , // position which animation start
+      end: , //position which animation end
       scrub: 1 ,
       },
       onUpdate: self => {
         const round = Math.round(imgUrl.index);
         if (round !== id){
+        // if current index value is different from id
+        // it means user scrolls out of area where images id is drawed
+        // we have to draw canvas again with new value.
         id = round;
         requestId = window.requestAnimationFrame(render);}
      }})
 ```
+
+And Boommm !!! this is what we get after a few lines of code.
+
+<video width="100%" autoPlay muted loop>
+  <source src="/videos/3d-result.mp4" type="video/mp4" />
+  Your browser does not support the video tag.
+</video>
+
+Looking not bad, right ?? :3 :3, how about images sprite? we will try in the next blogs.

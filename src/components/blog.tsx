@@ -2,7 +2,6 @@ import React from "react";
 import Link from "next/link";
 import { PostsData } from "@/types";
 export default function Blog({ data }: { data: PostsData }) {
-  console.log("data la", data);
   return (
     <article>
       <Link
@@ -11,7 +10,7 @@ export default function Blog({ data }: { data: PostsData }) {
       >
         <div className="md:h-[178px]  lg:h-[266px] " aria-hidden>
           <img
-            src="/images/hig-foundations-immersive-experiences-intro-dark_2x.jpg"
+            src={data["cover_image"]}
             className="w-full h-full group-hover:scale-110   transition-transform duration-500 object-cover object-center"
           />
         </div>
